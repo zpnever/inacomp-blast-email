@@ -6,14 +6,25 @@ const BlastEmailInput = () => {
 	const [emails, setEmails] = useState<string>("");
 	const [lomba, setLomba] = useState<string>("");
 
-	async function handleSubmit() {
-		const res = await fetch("/api/submitEmail", {
+	async function handleSubmitDc() {
+		const res = await fetch("/api/submitDc", {
 			method: "POST",
 			body: JSON.stringify({ emails, lomba }),
 		});
 
 		if (res.ok) {
-			console.log("email success blast");
+			alert("Discord berhasil di BLAST");
+		}
+	}
+
+	async function handleSubmitZoom() {
+		const res = await fetch("/api/submitZoom", {
+			method: "POST",
+			body: JSON.stringify({ emails, lomba }),
+		});
+
+		if (res.ok) {
+			alert("Zoom TM berhasil di BLAST");
 		}
 	}
 
@@ -33,9 +44,20 @@ const BlastEmailInput = () => {
 				name="email"
 				placeholder="example: andi@gmail.com, albert@gmail.com, einsten@gmail.com"
 			></textarea>
-			<button onClick={() => handleSubmit()} className="">
-				Submit
-			</button>
+			<div className="flex gap-2">
+				<button
+					onClick={() => handleSubmitDc()}
+					className="border-1 border-black p-2 cursor-pointer hover:bg-gray-100"
+				>
+					Blast Discord
+				</button>
+				<button
+					onClick={() => handleSubmitZoom()}
+					className="border-1 border-black p-2 cursor-pointer hover:bg-gray-100"
+				>
+					Blast Zoom TM
+				</button>
+			</div>
 		</div>
 	);
 };
